@@ -1,0 +1,99 @@
+import { Appear, Embed, Notes } from 'mdx-deck'
+import { CodeSurferLayout } from 'code-surfer'
+
+<CodeSurferLayout>
+
+```bash title='How to use decked-out 🚀'
+
+```
+
+```bash title='How to use decked-out 🚀' subtitle='Clone the repository'
+$ git clone https://github.com/grikomsn/decked-out.git
+```
+
+```bash title='How to use decked-out 🚀' subtitle='Install dependencies'
+$ git clone https://github.com/grikomsn/decked-out.git
+$ cd decked-out && yarn
+```
+
+```bash title='How to use decked-out 🚀' subtitle='Start development server'
+$ git clone https://github.com/grikomsn/decked-out.git
+$ cd decked-out && yarn
+$ yarn start
+```
+
+```bash 2:3 title='How to use decked-out 🚀' subtitle='Or start Storybook development server'
+$ git clone https://github.com/grikomsn/decked-out.git
+$ cd decked-out/storybook && yarn
+$ yarn start
+```
+
+```bash title='How to use decked-out 🚀' subtitle='Deploy using ZEIT Now'
+$ git clone https://github.com/grikomsn/decked-out.git
+$ cd decked-out/storybook && yarn
+$ yarn start
+$ now
+```
+
+```bash title='How to use decked-out 🚀' subtitle='Or test local production build using now dev'
+$ git clone https://github.com/grikomsn/decked-out.git
+$ cd decked-out/storybook && yarn
+$ yarn start
+$ now dev
+```
+
+</CodeSurferLayout>
+
+---
+
+<CodeSurferLayout>
+
+```markup title="Here's the directory structure 📂"
+├─ README.md
+├─ components >
+├─ deck.js
+├─ now.json
+├─ package.json
+├─ slides >
+├─ storybook >
+├─ style.css
+└─ yarn.lock
+```
+
+```markup 6:10 subtitle='Pre-made .mdx files in slides directory'
+├─ README.md
+├─ components >
+├─ deck.js
+├─ now.json
+├─ package.json
+├─ slides >
+│  ├─ 01-introduction.mdx
+│  ├─ 02-content.mdx
+│  ├─ 03-others.mdx
+│  └─ 99-closing.mdx
+├─ storybook >
+├─ style.css
+└─ yarn.lock
+```
+
+```markup 11:15 subtitle='Storybook project in separate directory'
+├─ README.md
+├─ components >
+├─ deck.js
+├─ now.json
+├─ package.json
+├─ slides >
+│  ├─ 01-introduction.mdx
+│  ├─ 02-content.mdx
+│  ├─ 03-others.mdx
+│  └─ 99-closing.mdx
+├─ storybook >
+│  ├─ package.json
+│  ├─ stories
+│  │  └─ Components.stories.js
+│  └─ yarn.lock
+├─ style.css
+└─ yarn.lock
+```
+
+</CodeSurferLayout>

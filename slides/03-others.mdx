@@ -1,0 +1,128 @@
+import { Appear, Embed, Notes } from 'mdx-deck'
+import { CodeSurferLayout } from 'code-surfer'
+
+<CodeSurferLayout>
+
+```js title="Here's another Code Surfer example 🏄‍♂️"
+import React, { Component } from 'react'
+
+class Hello extends Component {
+  render() {
+    return <div>Hello, world!</div>
+  }
+}
+```
+
+```js subtitle="Here's a subtitle for explaining code steps"
+import React, { Component } from 'react'
+
+class Hello extends Component {
+  render() {
+    return <div>Hello, ${'${this.props.name}'}!</div>
+  }
+}
+```
+
+```js title="And both title..." subtitle="...and subtitles"
+import React, { Component } from 'react'
+
+class Hello extends Component {
+  render() {
+    return <div>Hello, ${'${this.props.name}'}!</div>
+  }
+}
+
+Hello.defaultProps = { name: 'world' }
+```
+
+```js 3:7 subtitle="Highlight specific lines..."
+import React, { Component } from 'react'
+
+class Hello extends Component {
+  render() {
+    return <div>Hello, ${'${this.props.name}'}!</div>
+  }
+}
+
+Hello.defaultProps = { name: 'world' }
+```
+
+```js 3[7:11,21:29] subtitle="...or specific tokens"
+import React, { Component } from 'react'
+
+class Hello extends Component {
+  render() {
+    return <div>Hello, ${'${this.props.name}'}!</div>
+  }
+}
+
+Hello.defaultProps = { name: 'world' }
+```
+
+```js subtitle="New contents are highlighted automagically"
+import React, { Component } from 'react'
+
+function Hello() {
+  //
+}
+
+class Hello extends Component {
+  render() {
+    return <div>Hello, ${'${this.props.name}'}!</div>
+  }
+}
+
+Hello.defaultProps = { name: 'world' }
+```
+
+```js
+import React, { Component } from 'react'
+
+function Hello({ name = 'world' }) {
+  //
+}
+
+class Hello extends Component {
+  render() {
+    return <div>Hello, ${'${this.props.name}'}!</div>
+  }
+}
+
+Hello.defaultProps = { name: 'world' }
+```
+
+```js
+import React, { Component } from 'react'
+
+function Hello({ name = 'world' }) {
+  return <div>Hello, ${'${name}'}!</div>
+}
+
+class Hello extends Component {
+  render() {
+    return <div>Hello, ${'${this.props.name}'}!</div>
+  }
+}
+
+Hello.defaultProps = { name: 'world' }
+```
+
+```js 1:5
+import React from 'react'
+
+function Hello({ name = 'world' }) {
+  return <div>Hello, ${'${name}'}!</div>
+}
+```
+
+</CodeSurferLayout>
+
+---
+
+import Counter from '../components/Counter'
+
+<Counter />
+
+⋯
+
+###### [Open Storybook](/storybook)
