@@ -1,9 +1,6 @@
 {
   "name": "docker-deck",
   "version": 2,
-  "alias": [
-    "docker-deck.krosf.com"
-  ],
   "builds": [
     {
       "src": "package.json",
