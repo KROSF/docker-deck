@@ -1,45 +1,39 @@
-<!-- https://github.com/jxnblk/mdx-deck/blob/v2.5.1/docs/components.md -->
-
 import { Appear, Embed, Notes } from 'mdx-deck'
 import { CodeSurferLayout } from 'code-surfer'
 
 import Sandwich from '../components/ExtraHugeSandwich'
 
-# <Sandwich /> <br /> decked-out
-
-<h6>
-
-Level up your deck game with <br />
-[MDX Deck](https://github.com/jxnblk/mdx-deck/tree/v2.5.1),
-[Code Surfer](https://github.com/pomber/code-surfer/tree/v2.0.0-alpha.10),
-and [Storybook](https://github.com/storybookjs/storybook)
-
-</h6>
+<img src="https://www.docker.com/sites/default/files/d8/2019-07/vertical-logo-monochromatic.png" height="40%" width="40%"/>
 
 ---
 
-# Why I made this 🤔
+# ¿Qué es Docker?
 
-- Stop bootstrapping and import packages from scratch
-
-- Uses the stable version of [mdx-deck](https://github.com/jxnblk/mdx-deck/tree/v2.5.1)
-  and [code-surfer](https://github.com/pomber/code-surfer/tree/v2.0.0-alpha.10)
-
-- Ready as a [GitHub template](https://github.com/grikomsn/decked-out)
-  for future talks
+`Docker es un proyecto de código abierto para automatizar la implementación de aplicaciones como contenedores portátiles y autosuficientes que se pueden ejecutar en la nube o localmente.`
 
 ---
 
-# Perks and such 🤩
+# Terminologia Docker
 
 <ul>
   <Appear>
-    <li>Pre-made deck files, so you can get going</li>
-    <li>
-      <a href='/storybook'>Storybook available for demoing components</a>
+    <li> Contenedor
+      <ul>
+        <li>Forma ligera de empaquetar una aplicación con sus dependencias</li>
+      </ul>
     </li>
-    <li>
-      Optimized for <a href='https://zeit.co/home'>ZEIT Now</a> deployment
+    <li> Imagen
+      <ul>
+        <li>Plantilla para crear contenedores</li>
+        <li>Se crean a partir de un <b>Dockerfile</b></li>
+        <li>Se compone de capas de solo lectura</li>
+        <li>Se pueden subir a un <b>registry</b> para distribuirlas</li>
+      </ul>
+    </li>
+    <li> Dockerfile
+      <ul>
+        <li>Se compone de un conjuto de instrucciones para crear una <b>imagen</b></li>
+      </ul>
     </li>
   </Appear>
 </ul>

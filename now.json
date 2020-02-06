@@ -1,34 +1,27 @@
 {
-  "name": "decked-out",
+  "name": "docker-deck",
   "version": 2,
-  "alias": ["decked-out"],
+  "alias": [
+    "docker-deck.krosf.com"
+  ],
   "builds": [
     {
       "src": "package.json",
       "use": "@now/static-build",
-      "config": { "distDir": "dist" }
-    },
-    {
-      "src": "storybook/package.json",
-      "use": "@now/static-build",
-      "config": { "distDir": "storybook-static" }
+      "config": {
+        "distDir": "dist"
+      }
     }
   ],
   "routes": [
     {
       "src": "/[0-9]+$",
       "dest": "/"
-    },
-    {
-      "src": "/storybook",
-      "status": 301,
-      "headers": { "Location": "/storybook/" }
     }
   ],
   "github": {
     "autoAlias": true,
     "enabled": true
   },
-  "public": true,
-  "regions": ["all"]
+  "public": true
 }

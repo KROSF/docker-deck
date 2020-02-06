@@ -1,0 +1,206 @@
+import { Appear, Layouts, Notes } from 'mdx-deck'
+import { CodeSurferLayout } from 'code-surfer'
+import "prismjs/components/prism-docker"
+
+# docker-compose
+
+#### Es un fichero `.yaml` en el que se especifica como se deben de crear los contenedor evitando hacerlo de forma manual
+
+---
+
+<CodeSurferLayout>
+
+```bash title="docker-composer: Comandos" subtitle="Contruye las imagenes definidas en el fichero"
+$ docker-compose build
+```
+
+```bash title="docker-composer: Comandos" subtitle="Crea los contenedores"
+$ docker-compose up
+```
+
+```bash 1[21:23] title="docker-composer: Comandos" subtitle="Crea los contenedores en segunda plano"
+$ docker-compose up -d
+```
+
+```bash 1[21:28] title="docker-composer: Comandos" subtitle="Crea los contenedores forzando la creación de las imagenes"
+$ docker-compose up --build
+```
+
+```bash title="docker-composer: Comandos" subtitle="Lista los contenedores en ejecución"
+$ docker-compose ps
+```
+
+```bash  title="docker-composer: Comandos" subtitle="Muestra los logs del servicio indicado"
+$ docker-compose logs -f nombreServicio
+```
+
+```bash title="docker-composer: Comandos" subtitle="Para los contenedores en ejecución"
+$ docker-compose stop
+```
+
+```bash title="docker-composer: Comandos" subtitle="Elimina los contenedores"
+$ docker-compose down
+```
+
+</CodeSurferLayout>
+
+---
+
+<CodeSurferLayout>
+
+```yml title="docker-compose.yml" subtitle="Definimos nuetro servicio"
+version: "3"
+
+services:
+  mysql:
+```
+
+```yml title="docker-compose.yml" subtitle="Indicamos la imagen que se quiere utilizar"
+version: "3"
+
+services:
+  mysql:
+    image: mysql:8.0.19
+```
+
+```yml title="docker-compose.yml" subtitle="Definimos las variables de entorno para el contenedor"
+version: "3"
+
+services:
+  mysql:
+    image: mysql:8.0.19
+    enviroment:
+      - MYSQL_DATABASE=mysql
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=mysql
+      - MYSQL_ROOT_PASSWORD=mysql
+```
+
+```yml title="docker-compose.yml" subtitle="Exponemos puerto. xxxx:yyyy donde x es el puerto local e y el puerto de contenedor"
+version: "3"
+
+services:
+  mysql:
+    image: mysql:8.0.19
+    enviroment:
+      - MYSQL_DATABASE=mysql
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=mysql
+      - MYSQL_ROOT_PASSWORD=mysql
+    ports:
+      - 3306:3306
+```
+
+
+```yml title="docker-compose.yml" subtitle="Creamos una red"
+version: "3"
+
+services:
+  mysql:
+    image: mysql:8.0.19
+    enviroment:
+      - MYSQL_DATABASE=mysql
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=mysql
+      - MYSQL_ROOT_PASSWORD=mysql
+    ports:
+      - 3306:3306
+
+networks:
+  deck:
+```
+
+```yml title="docker-compose.yml" subtitle="Añadimos el contenedor a la red"
+version: "3"
+
+services:
+  mysql:
+    image: mysql:8.0.19
+    enviroment:
+      - MYSQL_DATABASE=mysql
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=mysql
+      - MYSQL_ROOT_PASSWORD=mysql
+    ports:
+      - 3306:3306
+    networks:
+      - deck
+
+networks:
+  deck:
+```
+
+```yml title="docker-compose.yml" subtitle="Creamos un volumen para persistir datos en caso de que el contenedor se pare o elimine"
+version: "3"
+
+services:
+  mysql:
+    image: mysql:8.0.19
+    enviroment:
+      - MYSQL_DATABASE=mysql
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=mysql
+      - MYSQL_ROOT_PASSWORD=mysql
+    ports:
+      - 3306:3306
+    networks:
+      - deck
+
+networks:
+  deck:
+
+volumes:
+  mysql-deck:
+```
+
+```yml title="docker-compose.yml" subtitle="Indicamos que datos deseamos persistir"
+version: "3"
+
+services:
+  mysql:
+    image: mysql:8.0.19
+    enviroment:
+      - MYSQL_DATABASE=mysql
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=mysql
+      - MYSQL_ROOT_PASSWORD=mysql
+    ports:
+      - 3306:3306
+    networks:
+      - deck
+    volumes
+      - mysql-deck:/var/lib/mysql
+
+networks:
+  deck:
+
+volumes:
+  mysql-deck:
+```
+
+```yml 1:22 title="docker-compose.yml"
+version: "3"
+
+services:
+  mysql:
+    image: mysql:8.0.19
+    enviroment:
+      - MYSQL_DATABASE=mysql
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=mysql
+      - MYSQL_ROOT_PASSWORD=mysql
+    ports:
+      - 3306:3306
+    networks:
+      - deck
+    volumes
+      - mysql-deck:/var/lib/mysql
+
+networks:
+  deck:
+
+volumes:
+  mysql-deck:
+```
+
+</CodeSurferLayout>
