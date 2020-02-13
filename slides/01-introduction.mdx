@@ -1,7 +1,7 @@
 import { Appear, Embed, Notes } from 'mdx-deck'
 import { CodeSurferLayout } from 'code-surfer'
+import "prismjs/components/prism-docker"
 
-import Sandwich from '../components/ExtraHugeSandwich'
 
 <img src="https://www.docker.com/sites/default/files/d8/2019-07/vertical-logo-monochromatic.png" height="40%" width="40%"/>
 
@@ -9,7 +9,7 @@ import Sandwich from '../components/ExtraHugeSandwich'
 
 # ¿Qué es Docker?
 
-`Docker es un proyecto de código abierto para automatizar la implementación de aplicaciones como contenedores portátiles y autosuficientes que se pueden ejecutar en la nube o localmente.`
+> Docker es un proyecto de código abierto que automatiza el despliegue de aplicaciones dentro de contenedores de software, proporcionando una capa adicional de abstracción y automatización de virtualización de aplicaciones en múltiples sistemas operativos.
 
 ---
 
@@ -17,23 +17,53 @@ import Sandwich from '../components/ExtraHugeSandwich'
 
 <ul>
   <Appear>
-    <li> Contenedor
-      <ul>
-        <li>Forma ligera de empaquetar una aplicación con sus dependencias</li>
-      </ul>
-    </li>
     <li> Imagen
       <ul>
         <li>Plantilla para crear contenedores</li>
         <li>Se crean a partir de un <b>Dockerfile</b></li>
         <li>Se compone de capas de solo lectura</li>
-        <li>Se pueden subir a un <b>registry</b> para distribuirlas</li>
+      </ul>
+    </li>
+    <li> Contenedor
+      <ul>
+        <li>Forma ligera de empaquetar una aplicación y sus dependencias</li>
+      </ul>
+    </li>
+    <li> Registry
+      <ul>
+        <li> Directorio que contiene imagenes docker</li>
       </ul>
     </li>
     <li> Dockerfile
       <ul>
-        <li>Se compone de un conjuto de instrucciones para crear una <b>imagen</b></li>
+        <li>Conjuto de instrucciones para crear una <b>imagen</b></li>
       </ul>
     </li>
   </Appear>
 </ul>
+
+---
+
+<CodeSurferLayout>
+
+```bash title="Hello World"
+$ docker run hello-world
+```
+
+```bash 1 title="Descargando una imagen"
+$ docker pull ubuntu
+```
+
+```bash 1 title="Ejecutar en modo interactivo"
+$ docker run -ti ubuntu sh
+```
+
+```bash 1 subtitle="Instalamos el paquete figlet"
+# apt-get install figlet
+```
+
+```bash 1 title="Creando una imagen" subtitle="se crea una imagen a partir de los cambios en el container"
+$ docker commit CONTAINER-ID nombre
+```
+
+</CodeSurferLayout>

@@ -60,7 +60,7 @@ version: "3"
 
 services:
   mysql:
-    image: mysql:8.0.19
+    image: mysql:8
 ```
 
 ```yml title="docker-compose.yml" subtitle="Definimos las variables de entorno para el contenedor"
@@ -68,7 +68,7 @@ version: "3"
 
 services:
   mysql:
-    image: mysql:8.0.19
+    image: mysql:8
     enviroment:
       - MYSQL_DATABASE=mysql
       - MYSQL_USER=mysql
@@ -81,7 +81,7 @@ version: "3"
 
 services:
   mysql:
-    image: mysql:8.0.19
+    image: mysql:8
     enviroment:
       - MYSQL_DATABASE=mysql
       - MYSQL_USER=mysql
@@ -97,7 +97,7 @@ version: "3"
 
 services:
   mysql:
-    image: mysql:8.0.19
+    image: mysql:8
     enviroment:
       - MYSQL_DATABASE=mysql
       - MYSQL_USER=mysql
@@ -115,7 +115,7 @@ version: "3"
 
 services:
   mysql:
-    image: mysql:8.0.19
+    image: mysql:8
     enviroment:
       - MYSQL_DATABASE=mysql
       - MYSQL_USER=mysql
@@ -130,12 +130,12 @@ networks:
   deck:
 ```
 
-```yml title="docker-compose.yml" subtitle="Creamos un volumen para persistir datos en caso de que el contenedor se pare o elimine"
+```yml title="docker-compose.yml" subtitle="Definimos un volumen"
 version: "3"
 
 services:
   mysql:
-    image: mysql:8.0.19
+    image: mysql:8
     enviroment:
       - MYSQL_DATABASE=mysql
       - MYSQL_USER=mysql
@@ -153,12 +153,12 @@ volumes:
   mysql-deck:
 ```
 
-```yml title="docker-compose.yml" subtitle="Indicamos que datos deseamos persistir"
+```yml title="docker-compose.yml" subtitle="Montamos el volumen en el contenedor"
 version: "3"
 
 services:
   mysql:
-    image: mysql:8.0.19
+    image: mysql:8
     enviroment:
       - MYSQL_DATABASE=mysql
       - MYSQL_USER=mysql
@@ -183,7 +183,7 @@ version: "3"
 
 services:
   mysql:
-    image: mysql:8.0.19
+    image: mysql:8
     enviroment:
       - MYSQL_DATABASE=mysql
       - MYSQL_USER=mysql
@@ -204,3 +204,20 @@ volumes:
 ```
 
 </CodeSurferLayout>
+
+---
+
+# Demo Time
+## <span style={{ fontSize: '10rem' }}>🙏</span>
+
+---
+
+# Hecho con [MDX-deck](https://github.com/jxnblk/mdx-deck)
+
+---
+
+# Referencias
+
+- [docker-curriculum](https://docker-curriculum.com/)
+- [Docker Glossary](https://docs.docker.com/glossary/)
+- [Docker Reference](https://docs.docker.com/reference/)

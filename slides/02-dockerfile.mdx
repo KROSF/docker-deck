@@ -13,299 +13,94 @@ FROM
 ```
 
 ```docker 1[6:19] title='Dockerfile 🐳' subtitle='estableciendo la imagen base para las instrucciones posteriores'
-FROM python:latest
-```
-
-```docker title='Dockerfile 🐳' subtitle='COPY/ADD añade ficheros o directorios'
-FROM python:latest
-
-COPY . .
+FROM ubuntu
 ```
 
 ```docker title='Dockerfile 🐳' subtitle='RUN ejecuta los comandos especificados creando una nueva capa'
-FROM python:latest
+FROM ubuntu
 
-COPY . .
-RUN pip install -r requirements.txt
+RUN apt-get update && apt-get install -y figlet
 ```
 
 ```docker title='Dockerfile 🐳' subtitle='CMD/ENTRYPOINT ejecutan los comandos especificados al iniciar el contenedor'
-FROM python:latest
+FROM ubuntu
 
-COPY . .
-RUN pip install -r requirements.txt
-CMD ["python", "main.py"]
+RUN apt-get update && apt-get install -y figlet
+CMD ["figlet", "opinno"]
 ```
 
 ```docker 1:5 title='Dockerfile 🐳'
-FROM python:latest
+FROM ubuntu
 
-COPY . .
-RUN pip install -r requirements.txt
-CMD ["python", "main.py"]
-```
-
-
-</CodeSurferLayout>
-
----
-
-
-<CodeSurferLayout>
-
-```docker title="Buenas Practicas"
-FROM python:latest
-
-COPY . .
-RUN pip install -r requirements.txt
-CMD ["python", "main.py"]
-```
-
-```docker title="Buenas Practicas" subtitle="Elegir una version concreta"
-FROM python:3.8
-
-COPY . .
-RUN pip install -r requirements.txt
-CMD ["python", "main.py"]
-```
-
-```docker title="Buenas Practicas" subtitle="COPY más concretos"
-FROM python:3.8
-
-COPY main.py .
-COPY requirements.txt .
-
-RUN pip install -r requirements.txt
-CMD ["python", "main.py"]
-```
-
-```docker title="Buenas Practicas" subtitle="añadir un WORKDIR"
-FROM python:3.8
-
-WORKDIR /app
-
-COPY main.py .
-COPY requirements.txt .
-
-RUN pip install -r requirements.txt
-CMD ["python", "main.py"]
-```
-
-
-```docker title="Buenas Practicas" subtitle="evitar la cache dentro de la imagen"
-FROM python:3.8
-
-WORKDIR /app
-
-COPY main.py .
-COPY requirements.txt .
-
-RUN pip install --no-cache-dir -r requirements.txt
-CMD ["python", "main.py"]
-```
-
-</CodeSurferLayout>
-
-
----
-
-# Buenas practicas
-
-
-<Layouts.Split>
-
-
-<div>
-
-`Elegir bien la imagen base`
-
-|       Imagen      | Tamaño |
-|-------------------|--------|
-| python:3.8        |  929MB |
-| python:3.8-slim   |  193MB |
-| python:3.8-alpine |  109MB |
-
-</div>
-
-- Usar un version slim cuando el tiempo de compilación sea importante
-- Usar una version alpine cuando el tamaño sea importante
-
-</Layouts.Split>
-
----
-
-
-<CodeSurferLayout>
-
-
-```docker title="Buenas Practicas" subtitle="Construyendo una imagen de produccion"
-FROM python:3.8-alpine
-
-WORKDIR /app
-
-COPY main.py .
-COPY requirements.txt .
-
-RUN apk add --no-cache \
-    build-base \
-    gcc \
-    libffi-dev \
-    openssl-dev
-RUN pip install -r requirements.txt
-
-CMD ["python", "main.py"]
-```
-
-```docker title="Buenas Practicas" subtitle="Ordernar las sentencias de menor a mayor cambio"
-FROM python:3.8-alpine
-
-WORKDIR /app
-
-COPY requirements.txt .
-
-RUN apk add --no-cache \
-    build-base \
-    gcc \
-    libffi-dev \
-    openssl-dev
-RUN pip install -r requirements.txt
-
-COPY main.py .
-
-CMD ["python", "main.py"]
-```
-
-
-```docker title="Buenas Practicas" subtitle="Combinar multiple sentencias RUN en una sola"
-FROM python:3.8-alpine
-
-WORKDIR /app
-
-COPY requirements.txt .
-
-RUN apk add --no-cache \
-    build-base \
-    gcc \
-    libffi-dev \
-    openssl-dev \
-    && pip install -r requirements.txt
-
-COPY main.py .
-
-CMD ["python", "main.py"]
-```
-
-```docker 1:16 title="Buenas Practicas"
-FROM python:3.8-alpine
-
-WORKDIR /app
-
-COPY requirements.txt .
-
-RUN apk add --no-cache \
-    build-base \
-    gcc \
-    libffi-dev \
-    openssl-dev \
-    && pip install -r requirements.txt
-
-COPY main.py .
-
-CMD ["python", "main.py"]
-```
-
-```docker title="Buenas Practicas" subtitle="Separar las depencias de compilación de las de construcción"
-FROM python:3.8-alpine
-
-WORKDIR /app
-
-ARG BUILD_DEPS="build-base gcc libffi-dev openssl-dev"
-ARG RUNTIME_DEPS="libcrypto1.1 libssl1.1"
-
-COPY requirements.txt .
-	
-RUN apk add --no-cache --virtual .build-deps $BUILD_DEPS \
- && pip install --no-cache-dir -r requirements.txt \
- && apk add --no-cache $RUNTIME_DEPS
-
-COPY main.py .
-
-CMD ["python", "main.py"]
-```
-
-```docker title="Buenas Practicas" subtitle="Eliminar depencias de construcción"
-FROM python:3.8-alpine
-
-WORKDIR /app
-
-ARG BUILD_DEPS="build-base gcc libffi-dev openssl-dev"
-ARG RUNTIME_DEPS="libcrypto1.1 libssl1.1"
-
-COPY requirements.txt .
-	
-RUN apk add --no-cache --virtual .build-deps $BUILD_DEPS \
- && pip install --no-cache-dir -r requirements.txt \
- && apk del .build-deps \
- && apk add --no-cache $RUNTIME_DEPS
-
-COPY main.py .
-
-CMD ["python", "main.py"]
-```
-
-```docker 1:18 title="Buenas Practicas" subtitle="Eliminar depencias de construcción"
-FROM python:3.8-alpine
-
-WORKDIR /app
-
-ARG BUILD_DEPS="build-base gcc libffi-dev openssl-dev"
-ARG RUNTIME_DEPS="libcrypto1.1 libssl1.1"
-
-COPY requirements.txt .
-	
-RUN apk add --no-cache --virtual .build-deps $BUILD_DEPS \
- && pip install --no-cache-dir -r requirements.txt \
- && apk del .build-deps \
- && apk add --no-cache $RUNTIME_DEPS
-
-COPY main.py .
-
-CMD ["python", "main.py"]
+RUN apt-get update && apt-get install -y figlet
+CMD ["figlet", "opinno"]
 ```
 
 </CodeSurferLayout>
 
 ---
 
+# Docker Volumes
+
+---
 
 <CodeSurferLayout>
 
-```bash title="Construyendo una imagen"
-$ docker build
+```bash title="Creando un volumen"
+$ docker volume create docker-deck
 ```
 
-```bash 1[16:43] title="Construyendo una imagen" subtitle="nombramos nuestra imagen"
-$ docker build -t krosf/docker-deck:latest
+```bash title="Montado un volumen"
+$ docker run -v "docker-deck:/tmp" ubuntu
 ```
 
-```bash 1[44:44] title="Construyendo una imagen" subtitle="especificamos donde se encuenta nuestro Dockerfile"
-$ docker build -t krosf/docker-deck:latest .
+```bash title="Montado un directorio"
+$ docker run -v "$PWD:/tmp" ubuntu ls -l /tmp
 ```
 
-```bash 1 title="Construyendo una imagen"
-$ docker build -t krosf/docker-deck:latest .
-```
+</CodeSurferLayout>
 
-```bash title="Creando un contenedor"
+---
+
+<CodeSurferLayout>
+
+```bash title="Contenedor Complejo"
 $ docker run 
 ```
 
-```bash 1[14:31] title="Creando un contenedor" subtitle="seleccionamos la imagen desde la cual se crea el contenedor"
-$ docker run krosf/docker-deck
+```bash 1[14:16] title="Contenedor Complejo" subtitle="Ejecuta el contenedor en segundo plano"
+$ docker run -d
 ```
 
-```bash 1 title="Creando un contenedor"
-$ docker run krosf/docker-deck
+```bash 1[17:28] title="Contenedor Complejo" subtitle="Asignamos un nombre a un contenedor"
+$ docker run -d --name name
+```
+
+```bash 1[29:63] title="Contenedor Complejo" subtitle="Establecemos variables de entorno en el contenedor"
+$ docker run -d --name name -e MYSQL_ROOT_PASSWORD=docker-deck
+```
+
+```bash 2 title="Contenedor Complejo" subtitle="Se puede asignar mas de una"
+$ docker run -d --name name -e MYSQL_ROOT_PASSWORD=docker-deck \
+    -e MYSQL_DATABASE=docker-deck
+```
+
+```bash 2[35:47] title="Contenedor Complejo" subtitle="Exponer puertos"
+$ docker run -d --name name -e MYSQL_ROOT_PASSWORD=docker-deck \
+    -e MYSQL_DATABASE=docker-deck -p 8080:8080
+```
+
+```bash 2[48:79] 3 title="Contenedor Complejo" subtitle="Montar Volumenes"
+$ docker run -d --name name -e MYSQL_ROOT_PASSWORD=docker-deck \
+    -e MYSQL_DATABASE=docker-deck -p 8080:8080 -v docker-deck:/var/lib/mysql \
+    -v "$PWD:/tmp"
+```
+
+```bash 1:4 title="Contenedor Complejo"
+$ docker run -d --name name -e MYSQL_ROOT_PASSWORD=docker-deck \
+    -e MYSQL_DATABASE=docker-deck -p 8080:8080 -v docker-deck:/var/lib/mysql \
+    -v "$PWD:/tmp" \
+    mysql:8
 ```
 
 </CodeSurferLayout>

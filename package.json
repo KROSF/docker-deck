@@ -1,13 +1,22 @@
 {
-  "name": "decked-out",
-  "description": "Level up your deck game with MDX Deck, Code Surfer, and Storybook 🥪",
+  "name": "@krosf/docker-deck",
+  "description": "Docker introduction",
   "version": "1.0.0",
-  "repository": "git@github.com:grikomsn/decked-out.git",
-  "author": "Griko Nibras <grikomsn@gmail.com>",
+  "repository": "https://github.com/KROSF/docker-deck.git",
+  "author": "Krosf <rodrigosanabria22@gmail.com>",
   "scripts": {
     "start": "mdx-deck deck.js",
     "build": "mdx-deck build deck.js",
-    "now-build": "yarn build"
+    "now-build": "yarn build",
+    "predocker:build": "yarn build",
+    "docker:build": "docker image build . -t $npm_package_config_image:$npm_package_version",
+    "predocker:tag": "yarn docker:build",
+    "docker:tag": "docker image tag $npm_package_config_image:$npm_package_version $npm_package_config_image:latest",
+    "predocker:push": "yarn docker:tag",
+    "docker:push": "docker push $npm_package_config_image"
+  },
+  "config": {
+    "image": "krosf/docker-deck"
   },
   "devDependencies": {
     "code-surfer": "^2.0.0-alpha.10",
