@@ -8,12 +8,17 @@
       "config": {
         "distDir": "dist"
       }
-    }
+    },
+    { "src": "python/**", "use": "@now/static" }
   ],
   "routes": [
     {
       "src": "/[0-9]+$",
       "dest": "/"
+    },
+    {
+      "src": "/python",
+      "dest": "/python"
     }
   ],
   "github": {
